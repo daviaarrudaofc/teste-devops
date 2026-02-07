@@ -1,21 +1,15 @@
-name: Monitor DevOps
+name: Monitor Docker
 
-on: [push]
+on:
+  push:
 
 jobs:
-  build:
+  build-docker:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
 
-    - name: Configurar Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Criar Log de Teste (Simulação)
-      run: echo "[INFO] Sistema rodando liso" > sistema.log
-
-    - name: Rodar Monitor Python
-      run: python monitor.py
+      - name: Construir Docker
+        run: docker build -t monitor-devops .

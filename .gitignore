@@ -1,0 +1,10 @@
+# Ignorar chaves de segurança (MUITO IMPORTANTE)
+*.pem
+*.key
+
+# Ignorar logs do sistema (não precisamos salvar histórico de erros no git)
+*.log
+
+# Ignorar arquivos de sistema do Mac/Windows
+.DS_Store
+Thumbs.db

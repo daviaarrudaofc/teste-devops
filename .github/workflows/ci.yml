@@ -1,19 +1,21 @@
-name: Monitoramento Automático
+name: Monitor DevOps
 
 on: [push]
 
 jobs:
-  verificacao-sistema:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Baixar código
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Dar permissão ao script
-        run: chmod +x monitor.sh
+    - name: Configurar Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
-      - name: Criar log de teste
-        run: echo "Log de Teste" > sistema.log
+    - name: Criar Log de Teste (Simulação)
+      run: echo "[INFO] Sistema rodando liso" > sistema.log
 
-      - name: Rodar Monitor
-        run: ./monitor.sh
+    - name: Rodar Monitor Python
+      run: python monitor.py

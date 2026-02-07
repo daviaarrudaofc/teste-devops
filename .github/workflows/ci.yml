@@ -1,0 +1,19 @@
+name: Monitoramento Automático
+
+on: [push]
+
+jobs:
+  verificacao-sistema:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v2
+
+      - name: Dar permissão ao script
+        run: chmod +x monitor.sh
+
+      - name: Criar log de teste
+        run: echo "Log de Teste" > sistema.log
+
+      - name: Rodar Monitor
+        run: ./monitor.sh

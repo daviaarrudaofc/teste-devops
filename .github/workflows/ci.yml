@@ -1,15 +1,17 @@
-name: Monitor Docker
+name: Build e Publish Docker
 
 on:
-  push:
+  - push
 
 jobs:
-  build-docker:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do repositório
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Construir Docker
-        run: docker build -t monitor-devops .
+      - name: Construir e Taggear
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/monitor-devops:latest .
+
+      - name: Publicar (Push)
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/monitor-devops:latest

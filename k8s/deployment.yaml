@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitor-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: monitor-sistema
+  template:
+    metadata:
+      labels:
+        app: monitor-sistema
+    spec:
+      containers:
+      - name: container-monitor
+        image: dab0106/monitor-devops:latest
+        ports:
+        - containerPort: 5000

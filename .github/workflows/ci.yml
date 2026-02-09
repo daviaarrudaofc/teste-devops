@@ -1,17 +1,24 @@
 name: Build e Publish Docker
 
-on:
-  - push
+on: [push]
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
+      
+      # Login usando o Token (A senha ainda vem do segredo por segurança)
+      - name: Login no Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: dab0106
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      # Construir usando o nome EXATO do repositório que você criou
       - name: Construir e Taggear
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/monitor-devops:latest .
-
+        run: docker build -t dab0106/monitor-devops:latest .
+        
+      # Enviar para o repositório criado
       - name: Publicar (Push)
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/monitor-devops:latest
+        run: docker push dab0106/monitor-devops:latest
